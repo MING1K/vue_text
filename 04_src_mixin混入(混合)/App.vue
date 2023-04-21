@@ -1,0 +1,23 @@
+<template>
+    <div>
+        <School></School>
+        <Student></Student> 
+    </div>  
+</template>
+
+<script>
+import School from './components/School.vue'
+import Student from './components/Student.vue'
+export default {
+    name:'App',
+    data(){
+        return{
+            msg:'hello,World'
+        }
+    },
+    components:{
+        Student,
+        School,
+    },
+}
+</script>
