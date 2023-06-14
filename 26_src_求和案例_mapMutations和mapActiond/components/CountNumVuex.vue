@@ -10,15 +10,19 @@
             <option value="2">2</option>
             <option value="3">3</option>
         </select>
-        <button @click="increment">+</button>
-        <button @click="decrement">-</button>
-        <button @click="incrementOdd">当前求和为奇数再加</button>
-        <button @click="incrementWait">等一等再加</button>
+        <button @click="increment(n)">+</button>
+        <button @click="decrement(n)">-</button>
+        <!-- <button @click="increment">+</button>
+        <button @click="decrement">-</button> -->
+        <!-- <button @click="ADD(n)">+</button>
+        <button @click="DECR(n)">-</button> -->
+        <button @click="incrementOdd(n)">当前求和为奇数再加</button>
+        <button @click="incrementWait(n)">等一等再加</button>
     </div>
 </template>
 
 <script>
-import { mapState,mapGetters } from 'vuex'
+import { mapState,mapGetters,mapMutations,mapActions } from 'vuex'
 export default {
     name:'CountNumVuex',
     data(){
@@ -27,17 +31,6 @@ export default {
         }
     },
     computed:{
-        // 自己亲自写计算属性
-        /* sum(){
-            return this.$store.state.sum
-        },
-        school(){
-            return this.$store.state.school
-        },
-        major(){
-            return this.$store.state.subject
-        }, */
-
         // 借助mapState生成计算属性，从state中读取数据（对象写法）
         // ...mapState({'sum':'sum',school:'school',major:'subject'}),
         // 借助mapState生成计算属性，从state中读取数据（数组写法）
@@ -47,24 +40,46 @@ export default {
         // ...mapGetters({bigSum:'bigSum'}),
         // 借助mapGetters生成计算属性，从getters中读取数据（数组写法）
         ...mapGetters(['bigSum']),
-
-        /* bigSum(){
-            return this.$store.getters.bigSum
-        }, */
     },
     methods:{
-        increment(){
+        // 程序员亲自写方法
+        /* increment(){
             this.$store.commit('ADD',this.n)
         },
         decrement(){
             this.$store.commit('DECR',this.n)
+        }, */
+
+        // 借助mapMutations生成对应方法，方法中会调用commit去联系mutations（对象写法）
+        ...mapMutations({increment:'ADD',decrement:'DECR'}),
+        // 借助mapMutations生成对应方法，方法中会调用commit去联系mutations（数组写法）
+        // ...mapMutations(['ADD','DECR'])
+
+        /* //一般不用
+        increment(){
+            this.addadd(this.n)
         },
-        incrementOdd(){
+        decrement(){
+            this.decrdeccr(this.n)
+        },
+        ...mapMutations({addadd:'ADD',decrdeccr'DECR'}),
+        */
+
+
+        /* ********************************** */
+        // 程序员亲自写方法
+        /* incrementOdd(){
             this.$store.dispatch('addOdd',this.n)
         },
         incrementWait(){
             this.$store.dispatch('addWait',this.n)
-        }
+        } */
+
+        // 借助mapMutations生成对应方法，方法中会调用dispatch去联系actions（对象写法）
+        ...mapActions({incrementOdd:'addOdd',incrementWait:'addWait'}),
+        // 借助mapMutations生成对应方法，方法中会调用dispatch去联系actions（数组写法）
+        // ...mapActions(['addOdd','addWait']),
+
     },
     mounted(){
     },
