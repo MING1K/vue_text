@@ -1,7 +1,8 @@
 # vue_text
 
 vue学习历史，附源代码，欢迎大家学习
-（将00_src_00……改为src即可运行）
+
+（将00_src_00……改为src即可运行每一个src）
 
 ## Project setup
 ```
